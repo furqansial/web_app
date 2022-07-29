@@ -85,6 +85,26 @@ def get_classifier(classifier_name, params):
         clf=clf=RandomForestClassifier(n_estimators=params['n_estimators'], max_depth=params['max_depth'],random_state=1234)
     return clf
 
+
+if st.checkbox('Show code'):
+    with st.echo():
+        # ab iss function ko call krein gay or clf variable ko assign kr deingay
+
+        clf=get_classifier(classifier_name, params)
+
+        # ab hum dataset ko test or train main split krein gay by 80/20
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
+
+        # ab hum ne apne classifier ki training krni hai
+
+        clf.fit(X_train, y_train)
+        y_pred=clf.predict(X_test)
+
+        # checking model's accuracy score
+
+        acc=accuracy_score(y_test,y_pred)
+
+
 # ab iss function ko call krein gay or clf variable ko assign kr deingay
 
 clf=get_classifier(classifier_name, params)
@@ -100,6 +120,7 @@ y_pred=clf.predict(X_test)
 # checking model's accuracy score
 
 acc=accuracy_score(y_test,y_pred)
+
 st.write(f'classifier = {classifier_name}')
 st.write(f'accuracy = {acc}')
 
